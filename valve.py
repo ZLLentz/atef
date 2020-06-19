@@ -4,7 +4,7 @@ import bluesky.plan_stubs as bps
 
 from atef.message import (assert_equals, assert_not_equals,
                           cache_value, restore_value)
-from atef.preprocessors import cache_and_restore
+from atef.preprocessors import cache_restore_decorator
 
 
 @cache_restore_decorator(['valve.at_vac_setpoint'])
@@ -56,3 +56,13 @@ def test_valve(valve: VGC):
     # Restore the cached value
     yield from restore_value(valve.at_vac_setpoint)
 
+    # Re-open the valve
+    yield from bps.abs_set(valve.command, valve.commands.open_valve.value)
+
+    # Clear fast fault
+    # Clear fast fault output
+    # I don't know how to do these
+
+    # Prompt user to check the log messages
+    yield from bps.input('Check that all log messages were emitted properly.'
+                         'Press enter when done.')
