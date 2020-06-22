@@ -1,13 +1,13 @@
+import bluesky.plan_stubs as bps
 from pcdsdevices.valve import VGC
 
-import bluesky.plan_stubs as bps
-
-from atef.message import (assert_equals, assert_not_equals,
-                          cache_value, restore_value)
+from atef.plan_stubs import (assert_equals, assert_not_equals,
+                             cache_value, restore_value)
+from atef.plan_tools import dry_run, Dummy
 from atef.preprocessors import cache_restore_decorator
 
 
-@cache_restore_decorator(['valve.at_vac_setpoint'])
+# @cache_restore_decorator(['valve.at_vac_setpoint'])
 def test_valve(valve: VGC):
     """
     Reactive:
@@ -57,12 +57,20 @@ def test_valve(valve: VGC):
     yield from restore_value(valve.at_vac_setpoint)
 
     # Re-open the valve
-    yield from bps.abs_set(valve.command, valve.commands.open_valve.value)
+    yield from bps.abs_set(1, valve.open_command)
 
     # Clear fast fault
     # Clear fast fault output
     # I don't know how to do these
 
     # Prompt user to check the log messages
-    yield from bps.input('Check that all log messages were emitted properly.'
-                         'Press enter when done.')
+    yield from bps.input_plan('Check that all log messages were emitted '
+                              'properly. Press enter when done.')
+
+
+def valve_test_dry_run():
+    dry_run(test_valve(Dummy(VGC, name='valve')))
+
+
+if __name__ == '__main__':
+    valve_test_dry_run()

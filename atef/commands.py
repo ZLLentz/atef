@@ -1,6 +1,8 @@
 """
 Module to define custom RE commands
 """
+
+
 def register_atef_commands(RE):
     """
     Registers all custom atef commands with a run engine.
@@ -34,8 +36,7 @@ def assert_handler(result, error_message, halt):
         assert_cache.append((result, error_message))
 
 
-
-async def _assert_equals(msg)
+async def _assert_equals(msg):
     """
     RE command that asserts an object's .get equals a particular value.
 
@@ -47,7 +48,7 @@ async def _assert_equals(msg)
                    msg.kwargs['halt'])
 
 
-async def _assert_not_equals(msg)
+async def _assert_not_equals(msg):
     """
     RE command that asserts an object's .get does not equal a particular value.
 

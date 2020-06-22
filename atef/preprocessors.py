@@ -4,7 +4,7 @@ import inspect
 from bluesky.preprocessors import finalize_wrapper
 from bluesky.utils import make_decorator
 
-from .message import cache_value, restore_value, annotate
+from .plan_stubs import cache_value, restore_value, annotate
 
 
 def find_attr_in_args(attr, func, args, kwargs):
@@ -38,7 +38,6 @@ def cache_restore_wrapper(plan, attrs):
         yield from annotate('Plan jumps here on failure')
         for obj in objs:
             yield from restore_value(obj)
-        yield from restore_all_values()
 
     @functools.wraps(plan)
     def new_plan(*args, **kwargs):

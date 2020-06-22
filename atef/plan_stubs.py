@@ -1,7 +1,7 @@
 from bluesky.utils import Msg
 
 
-def assert_equals(obj, value, error_message='', halt=True)
+def assert_equals(obj, value, error_message='', halt=True):
     """
     Plan stub that asserts an object's .get equals a particular value.
 
@@ -21,7 +21,7 @@ def assert_equals(obj, value, error_message='', halt=True)
                       error_message=error_message, halt=halt))
 
 
-def assert_not_equals(obj, value, error_message='', halt=True)
+def assert_not_equals(obj, value, error_message='', halt=True):
     """
     Plan stub that asserts an object's .get does not equal a particular value.
 
